@@ -180,8 +180,9 @@ LEFT JOIN NBR_CTE as D
 ORDER BY NumberOfShifts DESC, A.BusinessEntityID;
 
 /*---------------------------------------------------------
-Do some exploration of the Database AdventureWorks2022
-and produce some queries that you find are interesting. 
+If you have time, do some exploration of 
+the Database AdventureWorks2022 and produce some queries 
+that you find are interesting. 
 
 Obviously, you will have to do some explorations before
 beeing able to produce some queries. 
