@@ -25,6 +25,24 @@ Try to produce a subquery of your own choice.
 ---------------------------------------------------------*/
 https://learn.microsoft.com/en-us/sql/relational-databases/performance/subqueries?view=sql-server-ver16
 
+-- Below we are doing a Subquery, do you understand what it does?
+SELECT A.ProductID,
+	A.Quantity,
+	B.QuantityLevels
+FROM Production.ProductInventory as A
+LEFT JOIN(
+SELECT ProductID, 
+	CASE
+		WHEN Quantity <= 400 THEN 'Low'
+		WHEN Quantity > 400 and Quantity <= 500 THEN 'Medium'
+		ELSE 'High'
+	END AS QuantityLevels, 
+	Quantity
+FROM Production.ProductInventory
+) AS B ON A.ProductID = B.ProductID
+WHERE QuantityLevels = 'High';
+
+-- Below we are doing another Subquery, do you understand what it does?
 SELECT * FROM HumanResources.EmployeeDepartmentHistory; 
 
 SELECT BusinessEntityID, 
