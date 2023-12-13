@@ -14,7 +14,7 @@ SELECT ProductID,
 	CASE
 		WHEN Quantity <= 400 THEN 'Low'
 		WHEN Quantity > 400 and Quantity <= 500 THEN 'Medium'
-		ELSE 'Low'
+		ELSE 'High'
 	END AS QuantityLevels, 
 	Quantity
 FROM Production.ProductInventory;
@@ -25,8 +25,10 @@ Try to produce a subquery of your own choice.
 ---------------------------------------------------------*/
 https://learn.microsoft.com/en-us/sql/relational-databases/performance/subqueries?view=sql-server-ver16
 
+SELECT * FROM HumanResources.EmployeeDepartmentHistory; 
+
 SELECT BusinessEntityID, 
-	COUNT(BusinessEntityID) Nbr
+	COUNT(BusinessEntityID) NbrShifts
 FROM HumanResources.EmployeeDepartmentHistory
 GROUP BY BusinessEntityID;
 
