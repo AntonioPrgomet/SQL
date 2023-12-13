@@ -42,27 +42,24 @@ FROM Production.ProductInventory
 ) AS B ON A.ProductID = B.ProductID
 WHERE QuantityLevels = 'High';
 
--- Below we are doing another Subquery, do you understand what it does?
-SELECT * FROM HumanResources.EmployeeDepartmentHistory; 
+/*---------------------------------------------------------
+CTE - What is happening below? 
+Try to produce a CTE of your own choice. 
+---------------------------------------------------------*/
 
-SELECT BusinessEntityID, 
-	COUNT(BusinessEntityID) NbrShifts
-FROM HumanResources.EmployeeDepartmentHistory
-GROUP BY BusinessEntityID;
-
-SELECT 
-    A.BusinessEntityID, 
-    A.JobTitle,
-    B.NbrShifts
-FROM HumanResources.Employee AS A 
-LEFT JOIN (
-    SELECT 
-        BusinessEntityID,
-        COUNT(BusinessEntityID) AS NbrShifts
-    FROM HumanResources.EmployeeDepartmentHistory
-    GROUP BY BusinessEntityID
-) AS B ON A.BusinessEntityID = B.BusinessEntityID
-ORDER BY B.NbrShifts DESC;
+WITH MyCTE
+AS (
+SELECT ProductID, 
+	CASE
+		WHEN Quantity <= 400 THEN 'Low'
+		WHEN Quantity > 400 and Quantity <= 500 THEN 'Medium'
+		ELSE 'High'
+	END AS QuantityLevels, 
+	Quantity
+FROM Production.ProductInventory
+)
+SELECT * FROM MyCTE
+WHERE QuantityLevels = 'High';
 
 
 /*---------------------------------------------------------
